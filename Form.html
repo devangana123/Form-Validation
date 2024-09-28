@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validated Form</title>
+    <link rel="stylesheet" href="form.css">
+</head>
+<body>
+    <div id="form-container"></div>
+
+    <script>
+        const form = document.createElement('form');
+
+        const nameInput = document.createElement('input');
+        nameInput.placeholder = 'Name';
+        nameInput.required = true;
+        nameInput.type = 'text'; 
+        const nameError = document.createElement('span');
+                
+        const emailInput = document.createElement('input');
+        emailInput.type = 'email';
+        emailInput.placeholder = 'Email';
+        emailInput.required = true;
+        const emailError = document.createElement('span');
+
+        const contactInput = document.createElement('input');
+        contactInput.placeholder = 'Contact';
+        contactInput.required = true;
+        contactInput.pattern = '[0-9]{10}';  
+        contactInput.type = 'tel';  
+        const contactError = document.createElement('span');
+
+        const addressInput = document.createElement('textarea');
+        addressInput.placeholder = 'Address';
+        addressInput.required = true;
+        const addressError = document.createElement('span');
+
+
+        const dobInput = document.createElement('input');
+        dobInput.type = 'date';
+        dobInput.required = true;
+        const dobError=document.createElement('span');
+     
+
+        const passwordInput = document.createElement('input');
+        passwordInput.type = 'password';
+        passwordInput.placeholder = 'Password';
+        passwordInput.required = true;
+        passwordInput.minLength = 8;
+        const passwordError = document.createElement('span');
+
+        const submitBtn = document.createElement('button');
+        submitBtn.type = 'submit';
+        submitBtn.innerText = 'Submit';
+
+        form.appendChild(nameInput);
+        form.appendChild(nameError)
+        form.appendChild(document.createElement('br'));
+        
+        form.appendChild(emailInput);
+        form.appendChild(emailError)
+        form.appendChild(document.createElement('br'));
+        
+        form.appendChild(contactInput);
+        form.appendChild(contactError)
+        form.appendChild(document.createElement('br'));
+        
+        form.appendChild(addressInput);
+        form.appendChild(addressError)
+        form.appendChild(document.createElement('br'));
+        
+        form.appendChild(dobInput);
+        form.appendChild(dobError)
+        form.appendChild(document.createElement('br'));
+        
+        form.appendChild(passwordInput);
+        form.appendChild(passwordError)
+        form.appendChild(document.createElement('br'));
+        
+        form.appendChild(submitBtn);
+
+        document.getElementById('form-container').appendChild(form);
+
+        form.setAttribute('novalidate', true)
+        form.addEventListener('submit', function(e) {
+            e.preventDefault(); 
+            let isValid = true;
+
+            nameError.innerText = '';
+            emailError.innerText = '';
+            contactError.innerText = '';
+            addressError.innerText = '';
+            dobError.innerText = '';
+            passwordError.innerText = '';
+
+
+            if (!nameInput.checkValidity()) {
+                nameError.innerText ='Please enter a valid name.';
+                isValid = false;
+            }
+            if (!emailInput.checkValidity()) {
+                emailError.innerText='Please enter a valid email.';
+                isValid = false;
+            }
+            if (!contactInput.checkValidity()) {
+                contactError.innerText ='Please enter a valid contact number.';
+                isValid = false;
+            }
+            if (!addressInput.checkValidity()) {
+                addressError.innerText ='Please enter the address.';
+                isValid = false;
+            }
+            if (!dobInput.checkValidity()) {
+                dobError.innerText ='Please enter date of birth.';
+                isValid = false;
+            }
+            if (!passwordInput.checkValidity()) {
+                passwordError.innerText ='Please enter a valid password.';
+                isValid = false;
+            }
+            if (isValid) {
+                alert('Form submitted successfully.');
+                form.reset();
+            }
+        });
+    </script>
+</body>
+</html>
